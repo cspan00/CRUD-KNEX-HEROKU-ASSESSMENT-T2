@@ -11,7 +11,7 @@ describe('Posts CRUD Routes', function() {
   beforeEach(function () {
     return knex.seed.run(knex.config);
   });
-  it('should list ALL posts on /posts GET', function (done) {
+  xit('should list ALL posts on /posts GET', function (done) {
     chai.request(server)
     .get('/posts')
     .end(function(err, res){

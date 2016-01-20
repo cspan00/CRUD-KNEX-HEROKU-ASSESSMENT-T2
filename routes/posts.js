@@ -51,9 +51,9 @@ router.post('/:id/delete', function(req,res,next){
 })
 
 router.get('/:post_id/comments', function(req, res, next) {
-  Comments().where('post_id', req.params.id).then(function(comment){
-    console.log(comment);
-    res.json({'SUCCESS': comment[0]})
+  Comments().where(req.params, 'post_id').then(function(comment){
+
+    res.json({'SUCCESS': comment})
   });
 
 });
@@ -61,14 +61,15 @@ router.get('/:post_id/comments', function(req, res, next) {
 router.post('/:post_id/comments', function(req, res, next) {
   Comments().insert(req.body).then(function(comment){
 
-    res.redirect('/')
+    res.redirect('/posts/'+req.params.post_id+'/comments')
   });
 
 });
 
-router.get('/:post_id/comments/:comment_id', function(req,res,next){
-  Comments().where('comment_id', req.params.comment_id).then(function(comment){
-    res.json({'SUCCESS': comment[0]})
+router.get('/:post_id/comments/:id', function(req,res,next){
+  Comments().where('id', req.params.id).first().then(function(comment){
+    console.log(comment);
+    res.json({'SUCCESS': comment})
   })
 })
 
@@ -80,13 +81,13 @@ router.get('/:post_id/comments/:comment_id/edit', function(req,res,next){
 
 router.post('/:post_id/comments/:comment_id', function(req, res, next){
   Comments().where('id', req.params.comment_id).update(req.body).then(function(comment){
-    res.redirect('/')
+    res.redirect('/posts/'+req.params.post_id+'/comments/')
   })
 })
 
 router.post('/:post_id/comments/:comment_id/delete', function(req, res, next){
-  Comments.where('id', req.params.comment_id).del().then(function(comment){
-    res.redirect('/')
+  Comments().where('id', req.params.comment_id).del().then(function(comment){
+    res.redirect('/posts/'+req.params.post_id+'/comments/')
   })
 })
 

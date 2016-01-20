@@ -1,3 +1,6 @@
+https://fathomless-brushlands-45840.herokuapp.com/posts
+
+
 # READ THE README ------ THAT'S WHY IT'S CALLED A "README"
 
 ## OVERVIEW
